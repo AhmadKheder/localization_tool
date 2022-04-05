@@ -10,16 +10,12 @@ import * as React from "react";
 
 // import {db} from './Components/firebaseConfig/index'
 function generate(element: React.ReactElement) {
-  return ["0"].map((value) =>
+  return [0].map((value) =>
     React.cloneElement(element, {
       key: value,
     })
   );
 }
-// function GGG(ele: React.ReactElement) {
-
-//   return
-// }
 
 const Demo = styled("div")(({ theme }) => ({
   backgroundColor: theme.palette.background.paper,
@@ -50,9 +46,29 @@ export default function InteractiveList(props: any) {
                 noValidate
                 autoComplete="off"
               >
+                {Object.keys(data).map((word, index) => {
+                  console.log("word", word);
+                  const keyWord = word;
+                  const translations = data[word];
+                  console.log("translations", translations);
+
+                  return generate(
+                    <div className={classes.keyValue}>
+                      <label htmlFor="">{keyWord}</label>
+                      <ListItem>
+                        <TextField
+                          value={translations}
+                          id="standard-basic"
+                          label=""
+                          variant="standard"
+                        />
+                      </ListItem>
+                    </div>
+                  );
+                })}
                 {/* data = common: {save: 'حفظ', submit: 'إرسال'}
                          students: {title: 'الطلاب'} */}
-                {Object.keys(data).map((key) => {
+                {/* {Object.keys(data).map((key) => {
                   const group = data[key]; //{save: 'حفظ', submit: 'إرسال'} {title: 'الطلاب'}
                   console.log("group: ", group);
                   return Object.keys(group).map((word, index) => {
@@ -73,7 +89,7 @@ export default function InteractiveList(props: any) {
                       </div>
                     );
                   });
-                })}
+                })} */}
               </Box>
             </List>
           </Demo>

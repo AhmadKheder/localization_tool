@@ -47,7 +47,7 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
   padding: theme.spacing(2),
   borderTop: "1px solid rgba(0, 0, 0, .125)",
 }));
-////////////////
+
 interface Props {}
 
 export default function CustomizedAccordions(Props: any) {
@@ -58,8 +58,6 @@ export default function CustomizedAccordions(Props: any) {
       setExpanded(newExpanded ? panel : false);
     };
 
-  // React.useEffect(() => {}, snapshots);
-
   return (
     <div>
       <h1>Accordion</h1>
@@ -68,15 +66,11 @@ export default function CustomizedAccordions(Props: any) {
 
       {snapshots?.map((obj, index) => {
         const languageValues = obj.val();
-        // console.log("obj.key", Object.keys(obj.key));
-        console.log("snapshots[obj.key]: ", obj);
-
-        console.log("languageValues: ", languageValues);
-        // console.log("obj : ", obj.val());
+        // console.log("snapshots[obj.key]: ", obj);
+        // console.log("languageValues: ", languageValues);
         if (obj.key == "en") {
           return Object.keys(languageValues).map((key, idx) => {
             console.log("key: ", key);
-            // Object.keys(key).map()
             return (
               <Accordion
                 expanded={expanded === idx.toString()}
@@ -89,13 +83,7 @@ export default function CustomizedAccordions(Props: any) {
                   <Typography>{key.toString()}</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
-                  {/* {Object.keys(languageValues[key]).map((subkey, index) => {
-                    console.log("subkey", subkey);
-                    return <InteractiveList data={subkey} />;
-
-                    // Object.keys(subkey).map((subkeyData, idx) => {});
-                  })} */}
-                  <InteractiveList data={obj.val()} />
+                  <InteractiveList data={obj.val()[key]} />
                 </AccordionDetails>
               </Accordion>
             );
