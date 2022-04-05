@@ -47,10 +47,10 @@ export default function InteractiveList(props: any) {
                 autoComplete="off"
               >
                 {Object.keys(data).map((word, index) => {
-                  console.log("word", word);
+                  // console.log("word", word);
                   const keyWord = word;
                   const translations = data[word];
-                  console.log("translations", translations);
+                  // console.log("translations", translations);
 
                   return generate(
                     <div className={classes.keyValue}>
@@ -66,30 +66,6 @@ export default function InteractiveList(props: any) {
                     </div>
                   );
                 })}
-                {/* data = common: {save: 'حفظ', submit: 'إرسال'}
-                         students: {title: 'الطلاب'} */}
-                {/* {Object.keys(data).map((key) => {
-                  const group = data[key]; //{save: 'حفظ', submit: 'إرسال'} {title: 'الطلاب'}
-                  console.log("group: ", group);
-                  return Object.keys(group).map((word, index) => {
-                    console.log("word", word);
-                    const keyWord = word;
-                    const translations = group[word];
-                    return generate(
-                      <div className={classes.keyValue}>
-                        <label htmlFor="">{keyWord}</label>
-                        <ListItem>
-                          <TextField
-                            value={translations}
-                            id="standard-basic"
-                            label=""
-                            variant="standard"
-                          />
-                        </ListItem>
-                      </div>
-                    );
-                  });
-                })} */}
               </Box>
             </List>
           </Demo>

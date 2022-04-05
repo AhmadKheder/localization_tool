@@ -7,8 +7,8 @@ import MuiAccordionSummary, {
 import { styled } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import { ref } from "firebase/database";
-import * as React from "react";
-import { useList } from "react-firebase-hooks/database";
+import React from "react";
+import { useObjectVal } from "react-firebase-hooks/database";
 import { db } from "./Components/firebaseConfig";
 import InteractiveList from "./LocalizationTable";
 
@@ -50,45 +50,45 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
 
 interface Props {}
 
+interface Localization {
+  en: Record<string, Record<string, string>>;
+  ar: Record<string, Record<string, string>>;
+  tr: Record<string, Record<string, string>>;
+}
+
 export default function CustomizedAccordions(Props: any) {
   const [expanded, setExpanded] = React.useState<string | false>("panel1");
-  const [snapshots, loading, error] = useList(ref(db));
+  const [localizations, loading, error] = useObjectVal<Localization>(ref(db));
   const handleChange =
     (panel: string) => (event: React.SyntheticEvent, newExpanded: boolean) => {
       setExpanded(newExpanded ? panel : false);
     };
 
+  console.log({ localizations });
+  if (!localizations) {
+    return <span>loading...</span>;
+  }
   return (
     <div>
       <h1>Accordion</h1>
       {error && <strong>Error: {error}</strong>}
       {loading && <span>List: Loading...</span>}
 
-      {snapshots?.map((obj, index) => {
-        const languageValues = obj.val();
-        // console.log("snapshots[obj.key]: ", obj);
-        // console.log("languageValues: ", languageValues);
-        if (obj.key == "en") {
-          return Object.keys(languageValues).map((key, idx) => {
-            console.log("key: ", key);
-            return (
-              <Accordion
-                expanded={expanded === idx.toString()}
-                onChange={handleChange(idx.toString())}
-              >
-                <AccordionSummary
-                  aria-controls="panel1d-content"
-                  id={idx.toString()}
-                >
-                  <Typography>{key.toString()}</Typography>
-                </AccordionSummary>
-                <AccordionDetails>
-                  <InteractiveList data={obj.val()[key]} />
-                </AccordionDetails>
-              </Accordion>
-            );
-          });
-        }
+      {Object.keys(localizations.en).map((group) => {
+        console.log("key: ", group);
+        return (
+          <Accordion
+            expanded={expanded === group}
+            onChange={handleChange(group)}
+          >
+            <AccordionSummary aria-controls="panel1d-content" id={group}>
+              <Typography>{group}</Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <InteractiveList data={localizations.en[group]} />
+            </AccordionDetails>
+          </Accordion>
+        );
       })}
     </div>
   );
