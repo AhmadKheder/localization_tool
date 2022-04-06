@@ -21,6 +21,8 @@ const LANGUAGES = ["en", "tr", "ar"] as const;
 export default function InteractiveList(props: Props) {
   const { localizations, group } = props;
 
+  console.log("localizations.en[group]", localizations.en[group]);
+
   return (
     <Box sx={{ flexGrow: 1, maxWidth: 752 }}>
       <Grid container spacing={2}>
@@ -36,18 +38,25 @@ export default function InteractiveList(props: Props) {
                 autoComplete="off"
               >
                 {Object.keys(localizations.en[group]).map((word) => {
+
                   const value = zipObject(
                     LANGUAGES,
                     LANGUAGES.map((lang) => localizations[lang][group][word])
-                  );
-                  console.log("value>>");
-                  console.log(value);
+                  ) as Record<typeof LANGUAGES[number], string>;
+
+
+
+
+                  console.log("Value type is ===> ", value);
+
+
                   return (
                     <LocalizationItem
                       key={word}
                       word={word}
                       group={group}
                       value={value}
+                      
                     />
                   );
                 })}

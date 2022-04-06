@@ -8,14 +8,13 @@ import { ref, set } from "firebase/database";
 import React from "react";
 import { LANGUAGES } from "./Accrodion";
 import { db } from "./Components/firebaseConfig";
+import { LanguagesKeys } from "./types/common";
 
 interface Props {
   group: string;
   word: string;
-  value: Record<typeof LANGUAGES[number], string>;
+  value: Record<LanguagesKeys, string>;
 }
-// const xx : Record<typeof LANGUAGES[number], string> = {}
-// console.log(Record<typeof LANGUAGES[number], string>)
 
 export default function LocalizationItem(props: Props) {
   const { word, group } = props;
@@ -25,8 +24,8 @@ export default function LocalizationItem(props: Props) {
   console.log("props.valueprops.value", props.value);
   const classes = useStyles();
 
-  const handleSave = (passedLang: any) => {
-    set(ref(db, passedLang + "/" + group + "/" + word), value)
+  const handleSave = (passedLang: LanguagesKeys) => {
+    set(ref(db, passedLang + "/" + group + "/" + word), value[passedLang])
       .then(() => {
         alert(`success, value: ${value}`);
       })
@@ -35,20 +34,26 @@ export default function LocalizationItem(props: Props) {
       });
   };
 
+  const onValueChange = (newValue: string, language: LanguagesKeys) => {
+    setValue({ ...value, [language]: newValue });
+  };
+
+  console.log("====>", value);
+
   return (
     <div className={classes.keyValue}>
       <label htmlFor="">{word}</label>
       <ListItem>
-        {Object.keys(value).map((langVal) => {
+        {LANGUAGES.map((langVal) => {
           return (
             <div className={classes.fieldbtn}>
-              {" "}
               <TextField
-                value={value}
+                value={value[langVal]}
                 variant="standard"
                 onChange={(e) => {
-                  setValue(e.target.value);
+                  onValueChange(e.target.value, langVal);
                 }}
+                className={classes.textInput}
               />
               <div className={classes.btnsContainer}>
                 <Button variant="text">
@@ -61,7 +66,7 @@ export default function LocalizationItem(props: Props) {
                 <Button variant="text">
                   <CheckIcon
                     onClick={() => {
-                      handleSave("en");
+                      handleSave(langVal);
                     }}
                     className={classes.btn}
                   />
@@ -91,5 +96,9 @@ const useStyles = makeStyles(() => ({
   },
   btn: {
     // margin: "25px",
+  },
+
+  textInput: {
+    width: 200,
   },
 }));
