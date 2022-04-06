@@ -15,8 +15,8 @@ export default function CustomizedAccordions(Props: any) {
   const [expanded, setExpanded] = React.useState<string | false>("panel1");
   const [localizations, loading, error] = useObjectVal<Localization>(ref(db));
 
-  console.log("{ localizations }:");
-  console.log({ localizations });
+  // console.log("{ localizations }:");
+  // console.log({ localizations });
 
   if (!localizations) {
     return <span>loading...</span>;
@@ -26,10 +26,13 @@ export default function CustomizedAccordions(Props: any) {
       <h1>Accordion</h1>
       {error && <strong>Error: {error}</strong>}
       {loading && <span>List: Loading...</span>}
-
+     
       {Object.keys(localizations.en).map((group) => {
+        // Object.keys(localizations).map((key) => {
+        //   console.log(key);
+        // })
         return (
-          <Tuple data={localizations.en[group]} lang={"en"} group={group} />
+          <Tuple data={localizations.en[group]} lang={"en"} group={group} localizations={localizations} />
         );
       })}
     </div>

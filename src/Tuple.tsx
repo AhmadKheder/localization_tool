@@ -19,10 +19,10 @@ function Tuple(props: any) {
     };
   const [expanded, setExpanded] = React.useState<string | false>("panel1");
 
-  const { group, data, lang } = props;
-//   console.log("group+>", group);
-//   console.log("lang+>", lang);
-//   console.log("data+>", data);
+  const { group, data, lang, localizations } = props;
+  //   console.log("group+>", group);
+  //   console.log("lang+>", lang);
+  //   console.log("data+>", data);
   const classes = useStyles();
 
   return (
@@ -31,7 +31,12 @@ function Tuple(props: any) {
         <Typography>{group}</Typography>
       </AccordionSummary>
       <AccordionDetails>
-        <InteractiveList data={data} group={group} lang={lang} />
+        <InteractiveList
+          data={data}
+          group={group}
+          lang={lang}
+          localizations={localizations}
+        />
       </AccordionDetails>{" "}
     </Accordion>
   );

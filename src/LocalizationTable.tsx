@@ -30,15 +30,14 @@ export default function InteractiveList(props: any) {
   const [dense, setDense] = React.useState(false);
   const [secondary, setSecondary] = React.useState(false);
   const [fields, setFields] = React.useState<string[] | undefined>();
+
   const classes = useStyles();
 
-  const { data, group, lang } = props;
-  // console.log("PROPS: ", data);
+  const { data, group, lang, localizations } = props;
+  console.log("PROPS: ", data);
 
-  const handleSave = (word: string) => {
-    set(ref(db, lang + "/" + group + "/" + word), {
-      fields,
-    })
+  const handleSave = (word: string, passedLang: any) => {
+    set(ref(db, passedLang + "/" + group + "/" + word), fields)
       .then(() => {
         alert(`success, fields: ${fields}`);
       })
@@ -63,41 +62,56 @@ export default function InteractiveList(props: any) {
                 noValidate
                 autoComplete="off"
               >
-                {Object.keys(data).map((word, index) => {
-                  // console.log("word", word);
-                  const keyWord = word;
-                  const translations = data[word];
-                  // console.log("translations", translations);
+                {Object.keys(localizations).map((key) => {
+                  console.log(key);
+                  console.log(group);
 
-                  return generate(
-                    <div className={classes.keyValue}>
-                      <label htmlFor="">{keyWord}</label>
-                      <ListItem>
-                        <TextField
-                          defaultValue={translations}
-                          id={word}
-                          label=""
-                          variant="standard"
-                          onChange={(e) => {
-                            setFields(e.target.value as any);
-                          }}
-                        />
-                        <Button variant="text">
-                          <div className={classes.btnsContainer}>
-                            <CloseIcon
-                              onClick={(e) => alert("cancle")}
-                              className={classes.btn}
-                            />
-                            <span>|</span>
-                            <CheckIcon
-                              onClick={() => handleSave(word)}
-                              className={classes.btn}
-                            />
+                  console.log(localizations[key][group]);
+                  {
+                    return Object.keys(localizations[key][group]).map(
+                      (word, index) => {
+                        console.log("word", word);
+                        const keyWord = word;
+                        const translations = localizations[key][group][word];
+                        // console.log("translations", translations);
+
+                        return generate(
+                          <div className={classes.keyValue}>
+                            <label htmlFor="">{keyWord}</label>
+                            <ListItem>
+                              <TextField
+                                defaultValue={translations}
+                                id={word}
+                                label=""
+                                name={word}
+                                variant="standard"
+                                onChange={(e) => {
+                                  setFields(e.target.value as any);
+                                  // console.log(fields);
+                                }}
+                              />
+                              <Button variant="text">
+                                <div className={classes.btnsContainer}>
+                                  <CloseIcon
+                                    onClick={(e) => alert("cancle")}
+                                    className={classes.btn}
+                                  />
+                                  <span>|</span>
+                                  <CheckIcon
+                                    onClick={() => {
+                                      // console.log(fields);
+                                      handleSave(word, key);
+                                    }}
+                                    className={classes.btn}
+                                  />
+                                </div>
+                              </Button>
+                            </ListItem>
                           </div>
-                        </Button>
-                      </ListItem>
-                    </div>
-                  );
+                        );
+                      }
+                    );
+                  }
                 })}
               </Box>
             </List>
