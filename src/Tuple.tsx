@@ -8,21 +8,23 @@ import { styled } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import makeStyles from "@mui/styles/makeStyles";
 import React from "react";
+import { Localizations } from "./Accrodion";
 import InteractiveList from "./LocalizationTable";
 
-interface Props {}
+interface Props {
+  group: string;
+  localizations: Localizations;
+}
 
-function Tuple(props: any) {
+function Tuple(props: Props) {
   const handleChange =
     (panel: string) => (event: React.SyntheticEvent, newExpanded: boolean) => {
       setExpanded(newExpanded ? panel : false);
     };
   const [expanded, setExpanded] = React.useState<string | false>("panel1");
 
-  const { group, data, lang, localizations } = props;
-  //   console.log("group+>", group);
-  //   console.log("lang+>", lang);
-  //   console.log("data+>", data);
+  const { group, localizations } = props;
+
   const classes = useStyles();
 
   return (
@@ -31,13 +33,8 @@ function Tuple(props: any) {
         <Typography>{group}</Typography>
       </AccordionSummary>
       <AccordionDetails>
-        <InteractiveList
-          data={data}
-          group={group}
-          lang={lang}
-          localizations={localizations}
-        />
-      </AccordionDetails>{" "}
+        <InteractiveList group={group} localizations={localizations} />
+      </AccordionDetails>
     </Accordion>
   );
 }
