@@ -8,17 +8,25 @@ import { db } from "./Components/firebaseConfig";
 
 interface Props {
   group: string;
+  auto?: string;
+  // defaultInsertedValue?: { ar: string; en: string; tr: string };
 }
 
-function Form(props: Props) {
-  const [word, setWord] = useState<string>();
-  const [en, setEn] = useState<string>();
-  const [ar, setAr] = useState<string>();
-  const [tr, setTr] = useState<string>();
-
-  const { group } = props;
+function NewWordForm(props: Props) {
+  const [word, setWord] = useState<string>("WHAT!");
+  const [en, setEn] = useState<string>("WTF");
+  const [ar, setAr] = useState<string>("ما هذا بحق الجحيم!");
+  const [tr, setTr] = useState<string>("ىتريسadzxwqchsinىيشهتdsadخهتsin");
 
   const classes = useStyles();
+  const { group, auto } = props;
+
+  // const autoSave = useCallback(() => {
+  //   if (auto) {
+  //     writeUserData();
+  //   }
+  // }, [word]);
+  // autoSave();
 
   const insertNewWord = (
     word: string,
@@ -57,28 +65,28 @@ function Form(props: Props) {
   return (
     <div id={group + "form"} className={classes.toggle}>
       <TextField
-        defaultValue="New Word"
+        placeholder="New Word"
         variant="standard"
         onChange={(e) => {
           setWord(e.target.value);
         }}
       />
       <TextField
-        defaultValue="EN "
+        placeholder="EN "
         variant="standard"
         onChange={(e) => {
           setEn(e.target.value);
         }}
       />
       <TextField
-        defaultValue="AR "
+        placeholder="AR "
         variant="standard"
         onChange={(e) => {
           setAr(e.target.value);
         }}
       />
       <TextField
-        defaultValue="TR "
+        placeholder="TR "
         variant="standard"
         onChange={(e) => {
           setTr(e.target.value);
@@ -97,4 +105,4 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-export default React.memo(Form);
+export default React.memo(NewWordForm);

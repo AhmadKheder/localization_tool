@@ -9,7 +9,6 @@ import Typography from "@mui/material/Typography";
 import makeStyles from "@mui/styles/makeStyles";
 import React from "react";
 import { Localizations } from "./Accrodion";
-import Form from "./Form";
 import InteractiveList from "./LocalizationTable";
 
 interface Props {
@@ -34,38 +33,13 @@ function Tuple(props: Props) {
         <Typography>{group}</Typography>
       </AccordionSummary>
       <AccordionDetails>
-        {/* <Button
-          variant="text"
-          onClick={() => {
-            const form = document.getElementById(group)!;
-            if (form.className != classes.view) {
-              form.className = classes.view;
-            } else {
-              form.className = classes.toggle;
-            }
-          }}
-        >
-          Add word
-        </Button> */}
-        {/* <Form group={group} /> */}
-
         <InteractiveList group={group} localizations={localizations} />
       </AccordionDetails>
     </Accordion>
   );
 }
 
-const useStyles = makeStyles(() => ({
-  container: {
-    display: "flex",
-  },
-  toggle: {
-    display: "none",
-  },
-  view: {
-    display: "block",
-  },
-}));
+const useStyles = makeStyles(() => ({}));
 
 export default React.memo(Tuple);
 

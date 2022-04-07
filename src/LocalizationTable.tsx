@@ -7,8 +7,8 @@ import makeStyles from "@mui/styles/makeStyles";
 import { zipObject } from "lodash";
 import * as React from "react";
 import { Localizations } from "./Accrodion";
-import Form from "./Form";
 import LocalizationItem from "./LocalizationItem";
+import NewWordForm from "./NewWordForm";
 const Demo = styled("div")(({ theme }) => ({
   backgroundColor: theme.palette.background.paper,
 }));
@@ -52,7 +52,7 @@ export default function InteractiveList(props: Props) {
                 >
                   Add word
                 </Button>
-                <Form group={group} />
+                <NewWordForm group={group} />
                 {Object.keys(localizations.en[group]).map((word) => {
                   const value = zipObject(
                     LANGUAGES,
@@ -79,21 +79,6 @@ export default function InteractiveList(props: Props) {
   );
 }
 const useStyles = makeStyles(() => ({
-  keyValue: {
-    display: "flex",
-    alignItems: "center",
-  },
-  btnsContainer: {
-    display: "flex",
-    alignItems: "center",
-  },
-  btn: {
-    margin: "5px",
-  },
-  fieldbtn: {
-    display: "flex",
-    justifyContent: "space-between",
-  },
   toggle: {
     display: "none",
   },

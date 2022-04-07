@@ -57,10 +57,7 @@ export default function LocalizationItem(props: Props) {
               />
               <div className={classes.btnsContainer}>
                 <Button variant="text">
-                  <CloseIcon
-                    onClick={(e) => setValue(props.value)}
-                    className={classes.btn}
-                  />
+                  <CloseIcon onClick={(e) => setValue(props.value)} />
                 </Button>
                 {/* <span>|</span> */}
                 <Button variant="text">
@@ -68,7 +65,6 @@ export default function LocalizationItem(props: Props) {
                     onClick={() => {
                       handleSave(langVal);
                     }}
-                    className={classes.btn}
                   />
                 </Button>
               </div>
@@ -93,9 +89,6 @@ const useStyles = makeStyles(() => ({
   fieldbtn: {
     display: "flex",
     justifyContent: "space-between",
-  },
-  btn: {
-    // margin: "25px",
   },
 
   textInput: {

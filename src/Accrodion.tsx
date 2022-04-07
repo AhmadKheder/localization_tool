@@ -1,7 +1,9 @@
+import makeStyles from "@mui/styles/makeStyles";
 import { ref } from "firebase/database";
-import React from "react";
+import React, { useState } from "react";
 import { useObjectVal } from "react-firebase-hooks/database";
 import { db } from "./Components/firebaseConfig";
+import NewGroupForm from "./NewGroupForm";
 import Tuple from "./Tuple";
 interface Props {}
 
@@ -17,6 +19,8 @@ export interface Localizations {
 
 export default function CustomizedAccordions(Props: any) {
   const [localizations, loading, error] = useObjectVal<Localizations>(ref(db));
+  const [newGroupName, setNewGroupName] = useState<string>();
+  const classes = useStyles();
 
   if (!localizations) {
     return <span>loading...</span>;
@@ -24,15 +28,22 @@ export default function CustomizedAccordions(Props: any) {
 
   return (
     <div>
-      <h1>Accordion</h1>
       {error && <strong>Error: {error}</strong>}
       {loading && <span>List: Loading...</span>}
 
       {Object.keys(localizations.en).map((group) => {
-        console.log("1-GROUP? ", group);
-        console.log("1-LOCALIZATIONS? ", localizations);
         return <Tuple group={group} localizations={localizations} />;
       })}
+      <NewGroupForm />
     </div>
   );
 }
+
+const useStyles = makeStyles(() => ({
+  toggle: {
+    display: "none",
+  },
+  view: {
+    display: "block",
+  },
+}));
