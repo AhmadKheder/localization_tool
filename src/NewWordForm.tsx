@@ -17,17 +17,8 @@ function NewWordForm(props: Props) {
   const [en, setEn] = useState<string>("WTF");
   const [ar, setAr] = useState<string>("ما هذا بحق الجحيم!");
   const [tr, setTr] = useState<string>("ىتريسadzxwqchsinىيشهتdsadخهتsin");
-
   const classes = useStyles();
   const { group, auto } = props;
-
-  // const autoSave = useCallback(() => {
-  //   if (auto) {
-  //     writeUserData();
-  //   }
-  // }, [word]);
-  // autoSave();
-
   const insertNewWord = (
     word: string,
     language: string,
@@ -64,37 +55,39 @@ function NewWordForm(props: Props) {
 
   return (
     <div id={group + "form"} className={classes.toggle}>
-      <TextField
-        placeholder="New Word"
-        variant="standard"
-        onChange={(e) => {
-          setWord(e.target.value);
-        }}
-      />
-      <TextField
-        placeholder="EN "
-        variant="standard"
-        onChange={(e) => {
-          setEn(e.target.value);
-        }}
-      />
-      <TextField
-        placeholder="AR "
-        variant="standard"
-        onChange={(e) => {
-          setAr(e.target.value);
-        }}
-      />
-      <TextField
-        placeholder="TR "
-        variant="standard"
-        onChange={(e) => {
-          setTr(e.target.value);
-        }}
-      />
-      <Button variant="text" onClick={() => writeUserData()}>
-        Save
-      </Button>
+      <div>
+        <TextField
+          placeholder="New Word"
+          variant="standard"
+          onChange={(e) => {
+            setWord(e.target.value);
+          }}
+        />
+        <TextField
+          placeholder="EN "
+          variant="standard"
+          onChange={(e) => {
+            setEn(e.target.value);
+          }}
+        />
+        <TextField
+          placeholder="AR "
+          variant="standard"
+          onChange={(e) => {
+            setAr(e.target.value);
+          }}
+        />
+        <TextField
+          placeholder="TR "
+          variant="standard"
+          onChange={(e) => {
+            setTr(e.target.value);
+          }}
+        />
+        <Button variant="text" onClick={() => writeUserData()}>
+          Save
+        </Button>
+      </div>
     </div>
   );
 }

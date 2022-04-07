@@ -1,6 +1,7 @@
 import CheckIcon from "@mui/icons-material/Check";
 import CloseIcon from "@mui/icons-material/Close";
 import Button from "@mui/material/Button";
+import Checkbox from "@mui/material/Checkbox";
 import ListItem from "@mui/material/ListItem";
 import TextField from "@mui/material/TextField";
 import makeStyles from "@mui/styles/makeStyles";
@@ -42,53 +43,71 @@ export default function LocalizationItem(props: Props) {
 
   return (
     <div className={classes.keyValue}>
-      <label htmlFor="">{word}</label>
-      <ListItem>
-        {LANGUAGES.map((langVal) => {
-          return (
-            <div className={classes.fieldbtn}>
-              <TextField
-                value={value[langVal]}
-                variant="standard"
-                onChange={(e) => {
-                  onValueChange(e.target.value, langVal);
-                }}
-                className={classes.textInput}
-              />
-              <div className={classes.btnsContainer}>
-                <Button variant="text">
-                  <CloseIcon onClick={(e) => setValue(props.value)} />
-                </Button>
-                {/* <span>|</span> */}
-                <Button variant="text">
-                  <CheckIcon
-                    onClick={() => {
-                      handleSave(langVal);
-                    }}
-                  />
-                </Button>
+      <div className={classes.wordForm}>
+        <label htmlFor="">{word}</label>
+        <ListItem className={classes.translationsContainer}>
+          {LANGUAGES.map((langVal) => {
+            return (
+              <div className={classes.fieldbtn}>
+                <TextField
+                  value={value[langVal]}
+                  variant="standard"
+                  onChange={(e) => {
+                    onValueChange(e.target.value, langVal);
+                  }}
+                  className={classes.textInput}
+                />
+                <div className={classes.btnsContainer}>
+                  <Button variant="text">
+                    <CloseIcon onClick={(e) => setValue(props.value)} />
+                  </Button>
+                  {/* <span>|</span> */}
+                  <Button variant="text">
+                    <CheckIcon
+                      onClick={() => {
+                        handleSave(langVal);
+                      }}
+                    />
+                  </Button>
+                </div>
               </div>
-            </div>
-          );
-        })}
-      </ListItem>
+            );
+          })}
+        </ListItem>
+        <Checkbox color="primary" />
+      </div>
     </div>
   );
 }
 
 const useStyles = makeStyles(() => ({
+  translationsContainer: {
+    border: "4px dashed blue",
+    alignItems: "space-evenly",
+    justifyContent: "space-around",
+  },
+  wordForm: {
+    display: "flex",
+    alignItems: "center",
+
+    width: "100%",
+    height: "100px",
+
+    border: "1px solid red",
+  },
   keyValue: {
     display: "flex",
     alignItems: "center",
+    width: "100%",
   },
   btnsContainer: {
     display: "flex",
-    alignItems: "center",
-    marginLeft: "50px",
+    // alignItems: "flex-end",
   },
   fieldbtn: {
     display: "flex",
-    justifyContent: "space-between",
+    flexDirection: "column",
+    alignItems: "space-around ",
   },
 
   textInput: {

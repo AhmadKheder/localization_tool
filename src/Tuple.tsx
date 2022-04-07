@@ -29,7 +29,11 @@ function Tuple(props: Props) {
 
   return (
     <Accordion expanded={expanded === group} onChange={handleChange(group)}>
-      <AccordionSummary aria-controls="panel1d-content" id={group}>
+      <AccordionSummary
+        aria-controls="panel1d-content"
+        id={group}
+        sx={{ backgroundColor: "#FFFFFF" }}
+      >
         <Typography>{group}</Typography>
       </AccordionSummary>
       <AccordionDetails>
@@ -39,7 +43,11 @@ function Tuple(props: Props) {
   );
 }
 
-const useStyles = makeStyles(() => ({}));
+const useStyles = makeStyles(() => ({
+  accordion: {
+    backgroundColor: "#FFFFFF",
+  },
+}));
 
 export default React.memo(Tuple);
 

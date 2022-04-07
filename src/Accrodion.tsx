@@ -46,4 +46,16 @@ const useStyles = makeStyles(() => ({
   view: {
     display: "block",
   },
+  accordion: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    // padding: "0px 8px",
+
+    position: "absolute",
+    // width: "1728px",
+    height: "40px",
+    // left: "96px",
+    // top: "208px",
+  },
 }));
