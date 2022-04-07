@@ -1,4 +1,5 @@
 import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import List from "@mui/material/List";
 import { styled } from "@mui/material/styles";
@@ -6,8 +7,8 @@ import makeStyles from "@mui/styles/makeStyles";
 import { zipObject } from "lodash";
 import * as React from "react";
 import { Localizations } from "./Accrodion";
+import Form from "./Form";
 import LocalizationItem from "./LocalizationItem";
-
 const Demo = styled("div")(({ theme }) => ({
   backgroundColor: theme.palette.background.paper,
 }));
@@ -22,6 +23,7 @@ export default function InteractiveList(props: Props) {
   const { localizations, group } = props;
 
   console.log("localizations.en[group]", localizations.en[group]);
+  const classes = useStyles();
 
   return (
     <Box sx={{ flexGrow: 1, maxWidth: 752 }}>
@@ -37,18 +39,27 @@ export default function InteractiveList(props: Props) {
                 noValidate
                 autoComplete="off"
               >
+                <Button
+                  variant="text"
+                  onClick={() => {
+                    const form = document.getElementById(group + "form")!;
+                    if (form.className != classes.view) {
+                      form.className = classes.view;
+                    } else {
+                      form.className = classes.toggle;
+                    }
+                  }}
+                >
+                  Add word
+                </Button>
+                <Form group={group} />
                 {Object.keys(localizations.en[group]).map((word) => {
-
                   const value = zipObject(
                     LANGUAGES,
                     LANGUAGES.map((lang) => localizations[lang][group][word])
                   ) as Record<typeof LANGUAGES[number], string>;
 
-
-
-
                   console.log("Value type is ===> ", value);
-
 
                   return (
                     <LocalizationItem
@@ -56,7 +67,6 @@ export default function InteractiveList(props: Props) {
                       word={word}
                       group={group}
                       value={value}
-                      
                     />
                   );
                 })}
@@ -79,5 +89,15 @@ const useStyles = makeStyles(() => ({
   },
   btn: {
     margin: "5px",
+  },
+  fieldbtn: {
+    display: "flex",
+    justifyContent: "space-between",
+  },
+  toggle: {
+    display: "none",
+  },
+  view: {
+    display: "block",
   },
 }));
