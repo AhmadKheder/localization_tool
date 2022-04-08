@@ -2,7 +2,7 @@ import makeStyles from "@mui/styles/makeStyles";
 import { ref } from "firebase/database";
 import React, { useState } from "react";
 import { useObjectVal } from "react-firebase-hooks/database";
-import { db } from "./Components/firebaseConfig";
+import { db } from "../config/firebase";
 import NewGroupForm from "./NewGroupForm";
 import Tuple from "./Tuple";
 interface Props {}

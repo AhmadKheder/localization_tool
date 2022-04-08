@@ -1,14 +1,11 @@
-import CheckIcon from "@mui/icons-material/Check";
-import CloseIcon from "@mui/icons-material/Close";
-import Button from "@mui/material/Button";
 import Checkbox from "@mui/material/Checkbox";
-import TextField from "@mui/material/TextField";
 import makeStyles from "@mui/styles/makeStyles";
 import { ref, set } from "firebase/database";
 import React from "react";
+import { db } from "../config/firebase";
+import { LanguagesKeys } from "../types/common";
 import { LANGUAGES } from "./Accrodion";
-import { db } from "./Components/firebaseConfig";
-import { LanguagesKeys } from "./types/common";
+import LoclizationItemFields from "./LoclizationItemFields";
 
 interface Props {
   group: string;
@@ -34,10 +31,6 @@ export default function LocalizationItem(props: Props) {
       });
   };
 
-  const onValueChange = (newValue: string, language: LanguagesKeys) => {
-    setValue({ ...value, [language]: newValue });
-  };
-
   console.log("====>", value);
 
   return (
@@ -47,48 +40,13 @@ export default function LocalizationItem(props: Props) {
         <div className={classes.translationsContainer}>
           {LANGUAGES.map((langVal) => {
             return (
-              <div className={classes.fieldbtn}>
-                <div className={classes.textInput}>
-                  <TextField
-                    value={value[langVal]}
-                    variant="standard"
-                    onChange={(e) => {
-                      onValueChange(e.target.value, langVal);
-                    }}
-                    // className={classes.textInput}
-                    onDoubleClick={() => {
-                      const translastionDiv = document.getElementById(
-                        value[langVal] + "0"
-                      )!;
-                      console.log("translastionDiv.id+++", translastionDiv.id);
-                      if (translastionDiv.className != classes.btnsContainer) {
-                        translastionDiv.className = classes.btnsContainer;
-                      } else {
-                        translastionDiv.className = classes.btnsContainerNone;
-                      }
-                    }}
-                  />
-                </div>
-                <div
-                  className={classes.btnsContainerNone}
-                  id={value[langVal] + "0"}
-                >
-                  <Button className={classes.btn}>
-                    <CloseIcon
-                      onClick={(e) => setValue(props.value)}
-                      className={classes.icon}
-                    />
-                  </Button>
-                  <span>|</span>
-                  <Button className={classes.btn}>
-                    <CheckIcon
-                      onClick={() => {
-                        handleSave(langVal);
-                      }}
-                    />
-                  </Button>
-                </div>
-              </div>
+              <LoclizationItemFields
+                language={langVal}
+                onSvaeRequest={handleSave}
+                setValue={setValue}
+                value={value}
+                key={langVal}
+              />
             );
           })}
         </div>

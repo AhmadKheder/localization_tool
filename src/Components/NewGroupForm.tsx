@@ -3,12 +3,12 @@ import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import makeStyles from "@mui/styles/makeStyles";
 import React, { useState } from "react";
-import NewWordForm from "./NewWordForm";
 
 interface Props {}
 
 function NewGroupForm(props: Props) {
   const [newGroupName, setNewGroupName] = useState<string>();
+  const [addingNewGroup, setAddingNewGroup] = useState(false);
 
   const {} = props;
 
@@ -19,27 +19,23 @@ function NewGroupForm(props: Props) {
       <Button
         variant="text"
         onClick={() => {
-          const form = document.getElementById(newGroupName + "form")!;
-          console.log({ newGroupName });
-
-          if (form.className != classes.view) {
-            form.className = classes.view;
-          } else {
-            form.className = classes.toggle;
-          }
+          setAddingNewGroup(true);
         }}
       >
         <AddIcon /> Add Group
       </Button>
-      <TextField
-        placeholder="New Group"
-        variant="standard"
-        onChange={(e) => {
-          setNewGroupName(e.target.value);
-        }}
-      />
 
-      <NewWordForm group={newGroupName as string} />
+      {addingNewGroup ? (
+        <TextField
+          placeholder="New Group"
+          variant="standard"
+          onChange={(e) => {
+            setNewGroupName(e.target.value);
+          }}
+        />
+      ) : null}
+
+      {/* <NewWordForm group={newGroupName as string} /> */}
     </div>
   );
 }

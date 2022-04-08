@@ -3,8 +3,8 @@ import TextField from "@mui/material/TextField";
 import makeStyles from "@mui/styles/makeStyles";
 import { ref, set } from "firebase/database";
 import React, { useState } from "react";
+import { db } from "../config/firebase";
 import { LANGUAGES } from "./Accrodion";
-import { db } from "./Components/firebaseConfig";
 
 interface Props {
   group: string;

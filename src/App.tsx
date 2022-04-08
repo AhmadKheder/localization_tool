@@ -2,7 +2,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import makeStyles from "@mui/styles/makeStyles";
 import React from "react";
-import CustomizedAccordions from "./Accrodion";
+import CustomizedAccordions from "./Components/Accrodion";
 
 function App() {
   const classes = useStyles();
@@ -19,10 +19,10 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <div className={classes.App}>
-        <Typography variant="h4" component="h2" className={classes.title}>
-          Localization
-        </Typography>
         <div className={classes.tableContainer}>
+          <Typography variant="h4" component="h2" className={classes.title}>
+            Localization
+          </Typography>
           <div className={classes.localizationBar}>
             {["Key", "English", "Turkish", "Arabic", "Reviewed By Ali"].map(
               (title) => {
@@ -44,16 +44,19 @@ function App() {
 export default App;
 const useStyles = makeStyles(() => ({
   App: {
+    display: "flex",
+    flexDirection: "column",
     margi: 0,
     boxSizing: "border-box",
     height: "100%",
     fontFamily: "Segoe UI",
-
     letterSpacing: "0px",
     textAlign: "left",
     backgroundColor: "#FFFFFF",
   },
   title: {
+    display: "flex",
+    width: "80%",
     fontFamily: "Segoe UI",
     fontStyle: "normal",
     fontWeight: 600,
@@ -62,7 +65,11 @@ const useStyles = makeStyles(() => ({
     height: "48px",
   },
   tableContainer: {
-    // border: "2px dashed purple",
+    marginTop: 80,
+    display: "flex",
+    flexDirection: "column",
+    alignSelf: "center",
+    width: "80%",
   },
   localizationBar: {
     display: "flex",
@@ -73,7 +80,6 @@ const useStyles = makeStyles(() => ({
   barTyposContainer: {
     display: "flex",
     justifyContent: "center",
-
     width: "100%",
     height: "48px",
     borderRadius: "8px",
