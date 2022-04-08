@@ -28,11 +28,15 @@ function Tuple(props: Props) {
   const classes = useStyles();
 
   return (
-    <Accordion expanded={expanded === group} onChange={handleChange(group)}>
+    <Accordion
+      expanded={expanded === group}
+      onChange={handleChange(group)}
+      sx={{ borderStyle: "none" }}
+    >
       <AccordionSummary
         aria-controls="panel1d-content"
         id={group}
-        sx={{ backgroundColor: "#FFFFFF" }}
+        sx={{ backgroundColor: "#FFFFFF", borderStyle: "none" }}
       >
         <Typography>{group}</Typography>
       </AccordionSummary>
@@ -84,4 +88,4 @@ const AccordionSummary = styled((props: AccordionSummaryProps) => (
 const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
   padding: theme.spacing(2),
   borderTop: "1px solid rgba(0, 0, 0, .125)",
-}));
+}));  

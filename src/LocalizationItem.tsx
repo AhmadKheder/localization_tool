@@ -2,7 +2,6 @@ import CheckIcon from "@mui/icons-material/Check";
 import CloseIcon from "@mui/icons-material/Close";
 import Button from "@mui/material/Button";
 import Checkbox from "@mui/material/Checkbox";
-import ListItem from "@mui/material/ListItem";
 import TextField from "@mui/material/TextField";
 import makeStyles from "@mui/styles/makeStyles";
 import { ref, set } from "firebase/database";
@@ -45,24 +44,43 @@ export default function LocalizationItem(props: Props) {
     <div className={classes.keyValue}>
       <div className={classes.wordForm}>
         <label htmlFor="">{word}</label>
-        <ListItem className={classes.translationsContainer}>
+        <div className={classes.translationsContainer}>
           {LANGUAGES.map((langVal) => {
             return (
               <div className={classes.fieldbtn}>
-                <TextField
-                  value={value[langVal]}
-                  variant="standard"
-                  onChange={(e) => {
-                    onValueChange(e.target.value, langVal);
-                  }}
-                  className={classes.textInput}
-                />
-                <div className={classes.btnsContainer}>
-                  <Button variant="text">
-                    <CloseIcon onClick={(e) => setValue(props.value)} />
+                <div className={classes.textInput}>
+                  <TextField
+                    value={value[langVal]}
+                    variant="standard"
+                    onChange={(e) => {
+                      onValueChange(e.target.value, langVal);
+                    }}
+                    // className={classes.textInput}
+                    onDoubleClick={() => {
+                      const translastionDiv = document.getElementById(
+                        value[langVal] + "0"
+                      )!;
+                      console.log("translastionDiv.id+++", translastionDiv.id);
+                      if (translastionDiv.className != classes.btnsContainer) {
+                        translastionDiv.className = classes.btnsContainer;
+                      } else {
+                        translastionDiv.className = classes.btnsContainerNone;
+                      }
+                    }}
+                  />
+                </div>
+                <div
+                  className={classes.btnsContainerNone}
+                  id={value[langVal] + "0"}
+                >
+                  <Button className={classes.btn}>
+                    <CloseIcon
+                      onClick={(e) => setValue(props.value)}
+                      className={classes.icon}
+                    />
                   </Button>
-                  {/* <span>|</span> */}
-                  <Button variant="text">
+                  <span>|</span>
+                  <Button className={classes.btn}>
                     <CheckIcon
                       onClick={() => {
                         handleSave(langVal);
@@ -73,7 +91,7 @@ export default function LocalizationItem(props: Props) {
               </div>
             );
           })}
-        </ListItem>
+        </div>
         <Checkbox color="primary" />
       </div>
     </div>
@@ -81,36 +99,49 @@ export default function LocalizationItem(props: Props) {
 }
 
 const useStyles = makeStyles(() => ({
+  icon: {
+    width: "100%",
+    height: "100%",
+  },
+  btn: {
+    margin: 0,
+    width: "24px",
+    height: "24px",
+    // border: "1px solid red",
+  },
   translationsContainer: {
-    border: "4px dashed blue",
-    alignItems: "space-evenly",
+    display: "flex",
     justifyContent: "space-around",
+    width: "100%",
+
+    // border: "4px dashed blue",
   },
   wordForm: {
     display: "flex",
     alignItems: "center",
-
-    width: "100%",
-    height: "100px",
-
-    border: "1px solid red",
+    width: "84%",
+    marginLeft: "90px",
+    // border: "1px solid red",
   },
   keyValue: {
     display: "flex",
     alignItems: "center",
     width: "100%",
   },
+  btnsContainerNone: {
+    display: "none",
+    justifyContent: "flex-end",
+  },
   btnsContainer: {
     display: "flex",
-    // alignItems: "flex-end",
+    justifyContent: "flex-end",
   },
   fieldbtn: {
     display: "flex",
     flexDirection: "column",
-    alignItems: "space-around ",
   },
 
   textInput: {
-    width: 200,
+    // padding: " 0 80px",
   },
 }));

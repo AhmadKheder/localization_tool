@@ -55,7 +55,7 @@ function NewWordForm(props: Props) {
 
   return (
     <div id={group + "form"} className={classes.toggle}>
-      <div>
+      <div className={classes.addWordForm}>
         <TextField
           placeholder="New Word"
           variant="standard"
@@ -71,17 +71,17 @@ function NewWordForm(props: Props) {
           }}
         />
         <TextField
+          placeholder="TR"
+          variant="standard"
+          onChange={(e) => {
+            setTr(e.target.value);
+          }}
+        />
+        <TextField
           placeholder="AR "
           variant="standard"
           onChange={(e) => {
             setAr(e.target.value);
-          }}
-        />
-        <TextField
-          placeholder="TR "
-          variant="standard"
-          onChange={(e) => {
-            setTr(e.target.value);
           }}
         />
         <Button variant="text" onClick={() => writeUserData()}>
@@ -93,6 +93,10 @@ function NewWordForm(props: Props) {
 }
 
 const useStyles = makeStyles(() => ({
+  addWordForm: {
+    display: "flex  ",
+    justifyContent: "space-evenly",
+  },
   toggle: {
     display: "none",
   },

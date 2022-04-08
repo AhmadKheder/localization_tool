@@ -27,7 +27,7 @@ export default function InteractiveList(props: Props) {
   const classes = useStyles();
 
   return (
-    <Box sx={{ border: "2px dashed blue" }}>
+    <Box sx={{}}>
       <Button
         variant="text"
         sx={{ color: "#2BBF93" }}
@@ -75,17 +75,11 @@ const useStyles = makeStyles(() => ({
   addBtn: {
     display: "flex",
     alignItems: "center",
-    // padding: "0px 8px",
-
-    // width: "1688px",
     height: "40px",
-    // left: "0px",
     top: "0px",
   },
   addBtnIconB: {
-    // left: "20.83%",
     right: "20.83%",
-    // top: "20.83%",
     bottom: "20.83%",
     height: "14px",
     width: "14px",
@@ -94,8 +88,6 @@ const useStyles = makeStyles(() => ({
   addBtnTxt: {
     width: "96px",
     height: "20px",
-    // left: "0px",
-    // top: "10px",
     fontFamily: "Segoe UI",
     fontStyle: "normal",
     fontWeight: 400,

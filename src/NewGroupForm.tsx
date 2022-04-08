@@ -1,3 +1,4 @@
+import AddIcon from "@mui/icons-material/Add";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import makeStyles from "@mui/styles/makeStyles";
@@ -14,7 +15,7 @@ function NewGroupForm(props: Props) {
   const classes = useStyles();
 
   return (
-    <div>
+    <div style={{ backgroundColor: "#FFFFFF" }}>
       <Button
         variant="text"
         onClick={() => {
@@ -28,7 +29,7 @@ function NewGroupForm(props: Props) {
           }
         }}
       >
-        Add Group
+        <AddIcon /> Add Group
       </Button>
       <TextField
         placeholder="New Group"

@@ -44,10 +44,14 @@ function App() {
 export default App;
 const useStyles = makeStyles(() => ({
   App: {
-    margin: 0,
+    margi: 0,
     boxSizing: "border-box",
-    width: "100%",
     height: "100%",
+    fontFamily: "Segoe UI",
+
+    letterSpacing: "0px",
+    textAlign: "left",
+    backgroundColor: "#FFFFFF",
   },
   title: {
     fontFamily: "Segoe UI",
@@ -55,26 +59,27 @@ const useStyles = makeStyles(() => ({
     fontWeight: 600,
     fontSize: "32px",
     lineHeight: "48px",
-    width: "100%",
     height: "48px",
   },
   tableContainer: {
-    border: "1px dashed red",
+    // border: "2px dashed purple",
   },
   localizationBar: {
     display: "flex",
     height: "48px",
     backgroundColor: "#F6F6F8",
-
     borderRadius: "8px",
   },
   barTyposContainer: {
+    display: "flex",
+    justifyContent: "center",
+
     width: "100%",
     height: "48px",
-
     borderRadius: "8px",
   },
   barText: {
-    height: "24px",
+    display: "flex",
+    alignItems: "center",
   },
 }));
