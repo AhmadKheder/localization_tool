@@ -69,7 +69,7 @@ const useStyles = makeStyles(() => ({
   },
   translationsContainer: {
     display: "flex",
-    justifyContent: "space-around",
+    justifyContent: "space-evenly",
     width: "100%",
 
     // border: "4px dashed blue",
@@ -78,8 +78,6 @@ const useStyles = makeStyles(() => ({
     display: "flex",
     alignItems: "center",
     width: "84%",
-    marginLeft: "90px",
-    // border: "1px solid red",
   },
   keyValue: {
     display: "flex",
@@ -97,6 +95,7 @@ const useStyles = makeStyles(() => ({
   fieldbtn: {
     display: "flex",
     flexDirection: "column",
+    textAlign: "justify",
   },
 
   textInput: {

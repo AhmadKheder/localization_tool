@@ -34,7 +34,7 @@ function NewWordForm(props: Props) {
   };
 
   function writeUserData() {
-    alert("writeUserData");
+    // alert("writeUserData");
     LANGUAGES.map((langaya) => {
       switch (langaya) {
         case "en":
@@ -95,7 +95,10 @@ function NewWordForm(props: Props) {
 const useStyles = makeStyles(() => ({
   addWordForm: {
     display: "flex  ",
-    justifyContent: "space-evenly",
+    justifyContent: "space-between",
+    width: "84%",
+    border: "1px dotted gray",
+    // bor
   },
   toggle: {
     display: "none",

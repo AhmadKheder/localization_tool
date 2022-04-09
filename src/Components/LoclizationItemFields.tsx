@@ -1,6 +1,6 @@
 import CheckIcon from "@mui/icons-material/Check";
 import CloseIcon from "@mui/icons-material/Close";
-import { Button, TextField } from "@mui/material";
+import { Button, TextField, Typography } from "@mui/material";
 import makeStyles from "@mui/styles/makeStyles";
 import React, { SetStateAction, useCallback, useState } from "react";
 import { LanguagesKeys } from "../types/common";
@@ -26,7 +26,18 @@ function LoclizationItemFields(props: Props) {
   );
 
   const onEditRequest = useCallback(() => {
-    const translastionDiv = document.getElementById(value[language] + "0")!;
+    const translastionDiv = document.getElementById(
+      value[language] + "btnsDiv"
+    )!;
+    const inputTextField = document.getElementById(
+      value[language] + "InputTextFieldDiv"
+    )!;
+    const labelTypography = document.getElementById(
+      value[language] + "LabelTypography"
+    )!;
+
+    labelTypography.className = classes.displayNone;
+    inputTextField.className = classes.displayBlock;
     console.log("translastionDiv.id+++", translastionDiv.id);
     if (translastionDiv.className != classes.btnsContainer) {
       translastionDiv.className = classes.btnsContainer;
@@ -34,7 +45,19 @@ function LoclizationItemFields(props: Props) {
       translastionDiv.className = classes.btnsContainerNone;
     }
   }, [value, language]);
+  const fieldsValidations = () => {
+    const inputField4validationUse = document.getElementById(
+      value[language] + "InputTextField"
+    ) as HTMLInputElement;
+    alert(`OK: ${inputField4validationUse.value}`);
 
+    if (
+      inputField4validationUse.value.length <= 0 ||
+      inputField4validationUse.value == null
+    ) {
+      inputField4validationUse.className = classes.texfieldError;
+    }
+  };
   const onSave = useCallback(() => {
     onSvaeRequest(language);
   }, [language, onSvaeRequest]);
@@ -46,14 +69,30 @@ function LoclizationItemFields(props: Props) {
   return (
     <div className={classes.fieldbtn}>
       <div className={classes.textInput}>
-        <TextField
-          value={value[language]}
-          variant="standard"
-          onChange={onTextChange}
+        <Typography
           onDoubleClick={onEditRequest}
-        />
+          id={value[language] + "LabelTypography"}
+          className={classes.label}
+        >
+          {value[language]}
+        </Typography>
+        <div
+          className={classes.displayNone}
+          id={value[language] + "InputTextFieldDiv"}
+        >
+          <TextField
+            value={value[language]}
+            variant="outlined"
+            onChange={onTextChange}
+            onDoubleClick={onEditRequest}
+            id={value[language] + "InputTextField"}
+          />
+        </div>
       </div>
-      <div className={classes.btnsContainerNone} id={value[language] + "0"}>
+      <div
+        className={classes.btnsContainerNone}
+        id={value[language] + "btnsDiv"}
+      >
         <Button className={classes.btn}>
           <CloseIcon onClick={resetOldValue} className={classes.icon} />
         </Button>
@@ -67,6 +106,23 @@ function LoclizationItemFields(props: Props) {
 }
 
 const useStyles = makeStyles(() => ({
+  label: {
+    dir: "ltr",
+  },
+  testIT: {
+    color: "blue",
+    // width: "50px",
+  },
+  texfieldError: {
+    color: "red",
+    width: "50px",
+  },
+  displayBlock: {
+    display: "block",
+  },
+  displayNone: {
+    display: "none",
+  },
   icon: {
     width: "100%",
     height: "100%",
@@ -75,7 +131,6 @@ const useStyles = makeStyles(() => ({
     margin: 0,
     width: "24px",
     height: "24px",
-    // border: "1px solid red",
   },
 
   btnsContainerNone: {

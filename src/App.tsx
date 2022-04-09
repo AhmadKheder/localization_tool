@@ -3,6 +3,7 @@ import Typography from "@mui/material/Typography";
 import makeStyles from "@mui/styles/makeStyles";
 import React from "react";
 import CustomizedAccordions from "./Components/Accrodion";
+// import CustomizedAccordions from "./Accrodion";
 
 function App() {
   const classes = useStyles();
@@ -79,8 +80,9 @@ const useStyles = makeStyles(() => ({
   },
   barTyposContainer: {
     display: "flex",
-    justifyContent: "center",
-    width: "100%",
+    justifyContent: "flex-start",
+    marginLeft: "20px",
+    width: "84%",
     height: "48px",
     borderRadius: "8px",
   },
