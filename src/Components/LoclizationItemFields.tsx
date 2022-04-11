@@ -158,7 +158,7 @@ const useStyles = makeStyles(() => ({
     margin: 0,
     width: "24px",
     height: "24px",
-    border: "1px solid red",
+    // border: "1px solid,
   },
 
   btnsContainerNone: {

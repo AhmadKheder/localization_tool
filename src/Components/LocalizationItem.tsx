@@ -53,7 +53,13 @@ export default function LocalizationItem(props: Props) {
             );
           })}
         </div>
-        <Checkbox color="primary" />
+        <Checkbox
+          color="primary"
+          // sx={{
+          //   display: "grid",
+          //   gridTemplateColumns: "1fr ",
+          // }}
+        />
       </div>
     </div>
   );
@@ -71,20 +77,24 @@ const useStyles = makeStyles(() => ({
     // border: "1px solid red",
   },
   translationsContainer: {
-    display: "flex",
+    display: "grid",
+    // gridTemplateColumns: "20% 20% 20% ",
+    gridColumnGap: "10px",
+    gridAutoRows: "minmax(100px,auto)",
+    // gridAutoRows: "repeat(3,minmax(100px,auto))",
+    gridTemplateColumns: " 2fr 2fr 2fr ",
     justifyContent: "space-evenly",
     width: "100%",
-
-    // border: "4px dashed blue",
+    // border: "2px dashed blue",
   },
   wordForm: {
-    display: "flex",
-    alignItems: "center",
-    width: "84%",
+    display: "grid",
+    // gridAutoRows: "minmax(100px,auto)",
+    gridTemplateColumns: "30% 60% 10%",
+    // border: "1px dashed red",
+    // gridTemplateColumns: "30%  6fr 1fr ",
   },
   keyValue: {
-    display: "flex",
-    alignItems: "center",
     width: "100%",
   },
   btnsContainerNone: {
