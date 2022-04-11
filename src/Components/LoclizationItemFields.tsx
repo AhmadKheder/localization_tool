@@ -43,7 +43,7 @@ function LoclizationItemFields(props: Props) {
     if (translastionDiv.className != classes.btnsContainer) {
       translastionDiv.className = classes.btnsContainer;
     } else {
-      translastionDiv.className = classes.btnsContainerNone;
+      translastionDiv.className = classes.displayNone;
     }
   }, [value, language]);
 
@@ -63,7 +63,7 @@ function LoclizationItemFields(props: Props) {
     if (translastionDiv.className != classes.btnsContainer) {
       translastionDiv.className = classes.btnsContainer;
     } else {
-      translastionDiv.className = classes.btnsContainerNone;
+      translastionDiv.className = classes.displayNone;
     }
   }, [value, language]);
 
@@ -89,8 +89,15 @@ function LoclizationItemFields(props: Props) {
   }, [value, copy, setValue]);
 
   return (
-    <div className={classes.fieldbtn}>
-      <div className={classes.textInput}>
+    <div
+      style={
+        {
+          // width: "320px",
+          // border: "1px solid lightblue",
+        }
+      }
+    >
+      <div>
         <Typography
           onDoubleClick={onEditRequest}
           id={value[language] + "LabelTypography"}
@@ -103,7 +110,11 @@ function LoclizationItemFields(props: Props) {
           id={value[language] + "InputTextFieldDiv"}
         >
           <TextField
-            sx={{ width: "320px" }}
+            sx={{
+              maxWidth: "100%",
+              display: "flex",
+              justifyContent: "flex-end",
+            }}
             onBlur={handleBlur}
             //  onKeyDown
             value={value[language]}
@@ -114,29 +125,35 @@ function LoclizationItemFields(props: Props) {
           />
         </div>
       </div>
-      <div
-        className={classes.btnsContainerNone}
-        id={value[language] + "btnsDiv"}
-      >
-        <Button className={classes.btn}>
-          <CloseIcon onClick={resetOldValue} className={classes.icon} />
-        </Button>
-        <span>|</span>
-        <Button className={classes.btn}>
-          <CheckIcon onClick={onSave} className={classes.icon} />
-        </Button>
+      <div className={classes.displayNone} id={value[language] + "btnsDiv"}>
+        <div className={classes.btnContainer}>
+          <Button className={classes.btn}>
+            <CloseIcon onClick={resetOldValue} className={classes.icon} />
+          </Button>
+          {/* <span>|</span> */}
+          <Button className={classes.btn}>
+            <CheckIcon onClick={onSave} className={classes.icon} />
+          </Button>
+        </div>
       </div>
     </div>
   );
 }
 
 const useStyles = makeStyles(() => ({
+  btnContainer: {
+    display: "flex",
+    // width: "100px",
+    justifyContent: "space-between",
+    // alignSelf: "flex-end",
+  },
   label: {
     dir: "ltr",
+    maxWidth: "264px",
+    // border: "1px solid black",
   },
   testIT: {
     color: "blue",
-    // width: "50px",
   },
   texfieldError: {
     color: "red",
@@ -147,25 +164,24 @@ const useStyles = makeStyles(() => ({
   },
   displayNone: {
     display: "none",
-    width: "320px",
   },
   icon: {
     width: "100%",
     height: "100%",
-    border: "1px solid black",
+    // border: "1px solid black",
+    fontSize: "16px",
   },
   btn: {
     margin: 0,
-    width: "24px",
-    height: "24px",
-    // border: "1px solid,
+    Width: "24px  !important",
+    height: "  24px",
+    border: "1px solid gray",
+    backgroundColor: "white",
+
+    cursor: "pointer",
+    borderRadius: "2px",
   },
 
-  btnsContainerNone: {
-    display: "none",
-    // justifyContent: "flex-end",
-    marginTop: "4px",
-  },
   btnsContainer: {
     display: "flex",
     justifyContent: "flex-end",
@@ -177,6 +193,7 @@ const useStyles = makeStyles(() => ({
 
   textInput: {
     // padding: " 0 80px",
+    border: "1px solid red",
   },
 }));
 

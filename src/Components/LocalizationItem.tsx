@@ -39,7 +39,7 @@ export default function LocalizationItem(props: Props) {
   return (
     <div className={classes.keyValue}>
       <div className={classes.wordForm}>
-        <label htmlFor="">{word}</label>
+        <label className={classes.tupleWord}>{word}</label>
         <div className={classes.translationsContainer}>
           {LANGUAGES.map((langVal) => {
             return (
@@ -55,17 +55,24 @@ export default function LocalizationItem(props: Props) {
         </div>
         <Checkbox
           color="primary"
-          // sx={{
-          //   display: "grid",
-          //   gridTemplateColumns: "1fr ",
-          // }}
+          sx={{
+            display: "grid",
+            gridTemplateColumns: "1fr ",
+          }}
         />
       </div>
+      {/* <Divider /> */}
     </div>
   );
 }
 
 const useStyles = makeStyles(() => ({
+  tupleWord: {
+    // width: "320px",
+    wordWrap: "break-word",
+    // border: "1px solid purple",
+    padding: "0 8px",
+  },
   icon: {
     width: "100%",
     height: "100%",
@@ -78,19 +85,24 @@ const useStyles = makeStyles(() => ({
   },
   translationsContainer: {
     display: "grid",
-    // gridTemplateColumns: "20% 20% 20% ",
-    gridColumnGap: "10px",
-    gridAutoRows: "minmax(100px,auto)",
-    // gridAutoRows: "repeat(3,minmax(100px,auto))",
-    gridTemplateColumns: " 2fr 2fr 2fr ",
-    justifyContent: "space-evenly",
+
+    // gridRowGap: "50px",
+    // gridAutoRows: "minmax(100px,auto)",
+
+    gridTemplateColumns: " 1fr 1fr 1fr ",
     width: "100%",
     // border: "2px dashed blue",
   },
   wordForm: {
     display: "grid",
     // gridAutoRows: "minmax(100px,auto)",
-    gridTemplateColumns: "30% 60% 10%",
+    gridTemplateColumns: "20% 70% 10%",
+    gridColumnGap: "10px",
+    gridAutoRows: "minmax(10px,auto)",
+    // justifyContent: "flex-start",
+    // justifyContent: "flex-end",
+    // gridRowGap: "50px",
+    // rowGap: "50px !important",
     // border: "1px dashed red",
     // gridTemplateColumns: "30%  6fr 1fr ",
   },
