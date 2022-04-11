@@ -2,17 +2,12 @@ import AddIcon from "@mui/icons-material/Add";
 import { Typography } from "@mui/material";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import { styled } from "@mui/material/styles";
 import makeStyles from "@mui/styles/makeStyles";
 import { zipObject } from "lodash";
-import * as React from "react";
+import React, { useCallback } from "react";
 import { Localizations } from "./Accrodion";
 import LocalizationItem from "./LocalizationItem";
 import NewWordForm from "./NewWordForm";
-
-const Demo = styled("div")(({ theme }) => ({
-  backgroundColor: theme.palette.background.paper,
-}));
 
 interface Props {
   localizations: Localizations;
@@ -23,33 +18,36 @@ const LANGUAGES = ["en", "tr", "ar"] as const;
 export default function InteractiveList(props: Props) {
   const { localizations, group } = props;
 
-  console.log("localizations.en[group]", localizations.en[group]);
+  // console.log("localizations.en[group]", localizations.en[group]);
   const classes = useStyles();
-
+  const handleFormToggle = useCallback(() => {
+    const form = document.getElementById(group + "form")!;
+    if (form.className != classes.view) {
+      form.className = classes.view;
+    } else {
+      form.className = classes.toggle;
+    }
+  }, []);
   return (
     <Box sx={{}}>
       <Button
         variant="text"
         sx={{ color: "#2BBF93" }}
-        onClick={() => {
-          const form = document.getElementById(group + "form")!;
-          if (form.className != classes.view) {
-            form.className = classes.view;
-          } else {
-            form.className = classes.toggle;
-          }
-        }}
+        onClick={handleFormToggle}
         className={classes.addBtn}
       >
         <AddIcon className={classes.addBtnIconB} />{" "}
         <Typography className={classes.addBtnTxt}>Add Word</Typography>
       </Button>
-      <NewWordForm group={group} />
+      <div id={group + "form"} className={classes.toggle}>
+        <NewWordForm group={group} />
+      </div>
       {Object.keys(localizations.en[group]).map((word) => {
         const value = zipObject(
           LANGUAGES,
           LANGUAGES.map((lang) => localizations[lang][group][word])
         ) as Record<typeof LANGUAGES[number], string>;
+   
 
         console.log("Value type is ===> ", value);
 

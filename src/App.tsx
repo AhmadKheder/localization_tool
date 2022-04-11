@@ -25,7 +25,7 @@ function App() {
             Localization
           </Typography>
           <div className={classes.localizationBar}>
-            {["Key", "English", "Turkish", "Arabic", "Reviewed By Ali"].map(
+            {["Key", "English", "Turkish", "Arabic", "Reviewed"].map(
               (title) => {
                 return (
                   <div className={classes.barTyposContainer}>

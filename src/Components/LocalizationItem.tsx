@@ -1,7 +1,7 @@
 import Checkbox from "@mui/material/Checkbox";
 import makeStyles from "@mui/styles/makeStyles";
 import { ref, set } from "firebase/database";
-import React from "react";
+import React, { useCallback } from "react";
 import { db } from "../config/firebase";
 import { LanguagesKeys } from "../types/common";
 import { LANGUAGES } from "./Accrodion";
@@ -16,20 +16,23 @@ interface Props {
 export default function LocalizationItem(props: Props) {
   const { word, group } = props;
   const [value, setValue] = React.useState(props.value);
-  console.log(" TYPEOF props.value", typeof props.value);
+  /*  console.log(" TYPEOF props.value", typeof props.value);
   console.log("LL", { ...props });
-  console.log("props.valueprops.value", props.value);
+  console.log("props.valueprops.value", props.value); */
   const classes = useStyles();
 
-  const handleSave = (passedLang: LanguagesKeys) => {
-    set(ref(db, passedLang + "/" + group + "/" + word), value[passedLang])
-      .then(() => {
-        alert(`success, value: ${value}`);
-      })
-      .catch((error) => {
-        alert(`fail, value: ${value}`);
-      });
-  };
+  const handleSave = useCallback(
+    (passedLang: LanguagesKeys) => {
+      set(ref(db, passedLang + "/" + group + "/" + word), value[passedLang])
+        .then(() => {
+          alert(`success, value: ${value}`);
+        })
+        .catch((error) => {
+          alert(`fail, value: ${value}`);
+        });
+    },
+    [db, group, word, value]
+  );
 
   console.log("====>", value);
 

@@ -2,7 +2,7 @@
   "name": "localization",
   "version": "0.1.0",
   "private": true,
-  "homepage ":"https://AhmadKheder.github.io/localization_tool",
+  "homepage ": "https://AhmadKheder.github.io/localization_tool",
   "dependencies": {
     "@emotion/react": "^11.8.2",
     "@emotion/styled": "^11.8.1",
@@ -19,7 +19,8 @@
     "@types/react": "^17.0.43",
     "@types/react-dom": "^17.0.14",
     "eslint-config-react-app": "6",
-    "firebase": "^9.6.10",
+    "@firebase/app": "^0.7.20",
+    "@firebase/database": "^0.12.7",
     "gh-pages": "^3.2.3",
     "i18next": "^21.6.14",
     "i18next-browser-languagedetector": "^6.1.4",
@@ -40,7 +41,6 @@
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
-
   },
   "eslintConfig": {
     "extends": [

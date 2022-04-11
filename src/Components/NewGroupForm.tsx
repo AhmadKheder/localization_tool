@@ -2,7 +2,7 @@ import AddIcon from "@mui/icons-material/Add";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import makeStyles from "@mui/styles/makeStyles";
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import { insertNewWord } from "../types/functions";
 import { LANGUAGES } from "./Accrodion";
 // import { writeUserData } from "../types/functions";
@@ -16,7 +16,7 @@ function NewGroupForm(props: Props) {
   const {} = props;
 
   const classes = useStyles();
-  const addNewGroup = (groupName: string) => {
+  const addNewGroup = useCallback((groupName: string) => {
     const element = document.getElementById(
       "addNewGroup01"
     ) as HTMLInputElement;
@@ -29,13 +29,13 @@ function NewGroupForm(props: Props) {
         groupName
       );
     });
-  };
+  }, []);
   return (
     <div style={{ backgroundColor: "#FFFFFF" }}>
       <Button
         variant="text"
         onClick={() => {
-          setAddingNewGroup(true);
+          setAddingNewGroup(!addingNewGroup);
         }}
       >
         <AddIcon /> Add Group
@@ -57,8 +57,6 @@ function NewGroupForm(props: Props) {
           <Button>Cancel</Button>
         </div>
       ) : null}
-
-      {/* <NewWordForm group={newGroupName as string} /> */}
     </div>
   );
 }

@@ -1,6 +1,6 @@
 import makeStyles from "@mui/styles/makeStyles";
 import { ref } from "firebase/database";
-import React, { useState } from "react";
+import React from "react";
 import { useObjectVal } from "react-firebase-hooks/database";
 import { db } from "../config/firebase";
 import NewGroupForm from "./NewGroupForm";
@@ -19,9 +19,8 @@ export interface Localizations {
 
 export default function CustomizedAccordions(Props: any) {
   const [localizations, loading, error] = useObjectVal<Localizations>(ref(db));
-  const [newGroupName, setNewGroupName] = useState<string>();
   const classes = useStyles();
-
+  console.log({ localizations });
   if (!localizations) {
     return <span>loading...</span>;
   }
@@ -50,12 +49,7 @@ const useStyles = makeStyles(() => ({
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
-    // padding: "0px 8px",
-
     position: "absolute",
-    // width: "1728px",
     height: "40px",
-    // left: "96px",
-    // top: "208px",
   },
 }));

@@ -7,7 +7,7 @@ import MuiAccordionSummary, {
 import { styled } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import makeStyles from "@mui/styles/makeStyles";
-import React, { useState } from "react";
+import React, { useCallback } from "react";
 import { Localizations } from "./Accrodion";
 import InteractiveList from "./LocalizationTable";
 
@@ -17,13 +17,14 @@ interface Props {
 }
 
 function Tuple(props: Props) {
-  const [isToggled, setIsToggled] = useState<boolean>(false);
-  const handleChange =
-    (panel: string) => (event: React.SyntheticEvent, newExpanded: boolean) => {
-      setExpanded(newExpanded ? panel : false);
-    };
   const [expanded, setExpanded] = React.useState<string | false>("panel1");
 
+  const handleChange = useCallback(
+    (panel: string) => (event: React.SyntheticEvent, newExpanded: boolean) => {
+      setExpanded(newExpanded ? panel : false);
+    },
+    []
+  );
   const { group, localizations } = props;
 
   const classes = useStyles();
@@ -32,7 +33,6 @@ function Tuple(props: Props) {
     <Accordion
       expanded={expanded === group}
       onChange={handleChange(group)}
-      onClick={() => setIsToggled(!isToggled)}
       sx={{ borderStyle: "none" }}
     >
       <AccordionSummary
@@ -44,10 +44,9 @@ function Tuple(props: Props) {
       </AccordionSummary>
 
       <AccordionDetails>
-        {isToggled && (
+        {expanded === group && (
           <InteractiveList group={group} localizations={localizations} />
         )}
-        {/* <InteractiveList group={group} localizations={localizations} /> */}
       </AccordionDetails>
     </Accordion>
   );

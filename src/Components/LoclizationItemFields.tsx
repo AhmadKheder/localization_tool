@@ -15,15 +15,37 @@ interface Props {
 function LoclizationItemFields(props: Props) {
   const { language, value, onSvaeRequest, setValue } = props;
   const [copy, _] = useState(value[language]);
-
+  const inputProps = {
+    step: 300,
+  };
   const classes = useStyles();
 
   const onTextChange = useCallback(
     (e) => {
+      fieldsValidations();
       setValue({ ...value, [language]: e.target.value });
     },
     [language, value]
   );
+  const handleBlur = useCallback(() => {
+    const translastionDiv = document.getElementById(
+      value[language] + "btnsDiv"
+    )!;
+    const inputTextField = document.getElementById(
+      value[language] + "InputTextFieldDiv"
+    )!;
+    const labelTypography = document.getElementById(
+      value[language] + "LabelTypography"
+    )!;
+
+    labelTypography.className = classes.displayBlock;
+    inputTextField.className = classes.displayNone;
+    if (translastionDiv.className != classes.btnsContainer) {
+      translastionDiv.className = classes.btnsContainer;
+    } else {
+      translastionDiv.className = classes.btnsContainerNone;
+    }
+  }, [value, language]);
 
   const onEditRequest = useCallback(() => {
     const translastionDiv = document.getElementById(
@@ -38,14 +60,14 @@ function LoclizationItemFields(props: Props) {
 
     labelTypography.className = classes.displayNone;
     inputTextField.className = classes.displayBlock;
-    console.log("translastionDiv.id+++", translastionDiv.id);
     if (translastionDiv.className != classes.btnsContainer) {
       translastionDiv.className = classes.btnsContainer;
     } else {
       translastionDiv.className = classes.btnsContainerNone;
     }
   }, [value, language]);
-  const fieldsValidations = () => {
+
+  const fieldsValidations = useCallback(() => {
     const inputField4validationUse = document.getElementById(
       value[language] + "InputTextField"
     ) as HTMLInputElement;
@@ -57,7 +79,7 @@ function LoclizationItemFields(props: Props) {
     ) {
       inputField4validationUse.className = classes.texfieldError;
     }
-  };
+  }, []);
   const onSave = useCallback(() => {
     onSvaeRequest(language);
   }, [language, onSvaeRequest]);
@@ -81,6 +103,9 @@ function LoclizationItemFields(props: Props) {
           id={value[language] + "InputTextFieldDiv"}
         >
           <TextField
+            sx={{ width: "320px" }}
+            onBlur={handleBlur}
+            //  onKeyDown
             value={value[language]}
             variant="outlined"
             onChange={onTextChange}
@@ -98,7 +123,7 @@ function LoclizationItemFields(props: Props) {
         </Button>
         <span>|</span>
         <Button className={classes.btn}>
-          <CheckIcon onClick={onSave} />
+          <CheckIcon onClick={onSave} className={classes.icon} />
         </Button>
       </div>
     </div>
@@ -122,20 +147,24 @@ const useStyles = makeStyles(() => ({
   },
   displayNone: {
     display: "none",
+    width: "320px",
   },
   icon: {
     width: "100%",
     height: "100%",
+    border: "1px solid black",
   },
   btn: {
     margin: 0,
     width: "24px",
     height: "24px",
+    border: "1px solid red",
   },
 
   btnsContainerNone: {
     display: "none",
-    justifyContent: "flex-end",
+    // justifyContent: "flex-end",
+    marginTop: "4px",
   },
   btnsContainer: {
     display: "flex",

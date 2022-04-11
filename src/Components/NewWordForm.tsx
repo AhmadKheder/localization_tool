@@ -34,7 +34,6 @@ function NewWordForm(props: Props) {
   };
 
   function writeUserData() {
-    // alert("writeUserData");
     LANGUAGES.map((langaya) => {
       switch (langaya) {
         case "en":
@@ -54,7 +53,7 @@ function NewWordForm(props: Props) {
   }
 
   return (
-    <div id={group + "form"} className={classes.toggle}>
+    <div>
       <div className={classes.addWordForm}>
         <TextField
           placeholder="New Word"
@@ -98,7 +97,6 @@ const useStyles = makeStyles(() => ({
     justifyContent: "space-between",
     width: "84%",
     border: "1px dotted gray",
-    // bor
   },
   toggle: {
     display: "none",
